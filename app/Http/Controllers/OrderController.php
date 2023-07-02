@@ -14,7 +14,8 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        $orders = Order::all(); // Fetch all orders (replace "Order" with your actual model name)
+        return view('orders.index', compact('orders'));
     }
 
     /**
@@ -107,7 +108,17 @@ class OrderController extends Controller
     {
         //
     }
-
+    public function updateStatus(Request $request, Order $order)
+    {
+        $request->validate([
+            'status' => 'required|in:completed,decline',
+        ]);
+    
+        $order->status = $request->input('status');
+        $order->save();
+    
+        return redirect()->route('orders.index')->with('success', 'Order status updated successfully.');
+    }
     /**
      * Show the form for editing the specified resource.
      *

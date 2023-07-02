@@ -26,7 +26,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    {{ config('app.name', 'ESHOP') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -75,6 +75,20 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <!-- Check if the user is an admin -->
+                                    @if(Auth::user()->is_admin)
+                                        <a class="dropdown-item" href="{{ route('create.product') }}">
+                                            Create Product
+                                        </a>
+                                        <div class="dropdown-divider"></div>
+                                    @endif
+                                    @if(Auth::user()->is_admin)
+                        <a class="dropdown-item" href="{{ route('orders.index') }}">
+                            Orders
+                        </a>
+                        <div class="dropdown-divider"></div>
+                    @endif
+
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
